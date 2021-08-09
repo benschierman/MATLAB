@@ -25,7 +25,7 @@ maxabs = abs(maxx);
 [M, I] = max(maxabs);
 x(1) = max_x(I); % - This is the max of the function (x value)
 
-for i = -1:1:n
+for i = 1:n
     x(i+1) = maxx(i);
     %p(i) = 
     
