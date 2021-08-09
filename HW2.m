@@ -34,5 +34,8 @@ for i = 1:n
     fplot(f, [-1 1]);
     drawnow();
     pause();
-end
+end 
+d=12;
+and then;
+
 
