@@ -2,45 +2,42 @@
 
 close all, clear all
 
+%% Initiation
+%f = @(x) abs(x);
+f = @(x) (1)./(1+25*x.^2);
+n = 50;
 
-f = input('Please enter a function f(x) in the form @(x) [function] \n');
-n = input('How many points would you like to compute? \n');
+%Determine x0 [which is x(1)]
+z = linspace(-1, 1, 100001);
+zfx = f(z); % Plotting (z, zfx) gives us the function above
+azfx = abs(zfx);
+[M, I] = max(azfx);
+x(1) = z(I);
 
-if isempty(f);
-    f = @(x) abs(x);
+%% For Loop
+
+for i = 1:n % I think we start this at 1 since I already determined the first x value above
+y = f(x);
+w = lagrange_weights(x);
+v = langrange_eval_barycentric(z, x, y, w);  %this is the interpolated polynomial
+[M, I] = max(abs(zfx - v));
+x(i+1) = z(I);
+%find the error subtract f from v
+disp(i)
 end
 
-if isempty(n);
-    n = 5;
-end
+%%Plots
 
-%Set up 100001 points and evaluate them at the function f
-max_x = linspace(-1, 1, 100001);
-maxx = f(max_x);
-
-%Take absolute value
-maxabs = abs(maxx);
-
-% Determine x and y value in the array 
-[M, I] = max(maxabs);
-x(1) = maxx(I); % - This is the max of the function (x value)
-p0 = I;
-pp = abs(maxx - p0);
-[M,I] = max(abs(maxx - p0));
-x(2) = maxx(I);
-mp = (x(2)-x(1))/(f(x(2))-f(x(1)));
-p1 = @(xx) mp*(xx-x(2))+f(x(2));
-
-
-fplot(f, [-1, 1])
+figure(1);
+plot(z, zfx) % this is our actual function
 hold on
-plot(p0)
-fplot(p1)
-   
-%fplot(f, [-1 1]);
-  %  drawnow();
- %   pause();
- 
+error = abs(zfx - v);
+plot(z,v)
+legend('f(x)', 'Calculated solution')
 
+figure(2);
+plot(z, error) %this is the error
+plot(z, mean(error), '--')
+legend('Error - |f(x) - p_n(x)|')
 
 
