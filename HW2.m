@@ -23,8 +23,8 @@ maxabs = abs(maxx);
 
 % Determine x and y value in the array 
 [M, I] = max(maxabs);
-x(1) = max_x(I); % - This is the max of the function (x value)
-
+x(1) = maxx(I); % - This is the max of the function (x value)
+p0 = I
 for i = 1:n
     x(i+1) = maxx(i);
     %p(i) = 
