@@ -24,18 +24,23 @@ maxabs = abs(maxx);
 % Determine x and y value in the array 
 [M, I] = max(maxabs);
 x(1) = maxx(I); % - This is the max of the function (x value)
-p0 = I
-for i = 1:n
-    x(i+1) = maxx(i);
-    %p(i) = 
-    
-    plot(x)
-    hold on
-    fplot(f, [-1 1]);
-    drawnow();
-    pause();
-end 
-d=12;
-and then;
+p0 = I;
+pp = abs(maxx - p0);
+[M,I] = max(abs(maxx - p0));
+x(2) = maxx(I);
+mp = (x(2)-x(1))/(f(x(2))-f(x(1)));
+p1 = @(xx) mp*(xx-x(2))+f(x(2));
+
+
+fplot(f, [-1, 1])
+hold on
+plot(p0)
+fplot(p1)
+   
+%fplot(f, [-1 1]);
+  %  drawnow();
+ %   pause();
+ 
+
 
 
