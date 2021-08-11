@@ -3,10 +3,10 @@
 close all, clear all
 
 %% Initiation
-%f = @(x) abs(x);
+f = @(x) abs(x);
 %f = @(x) (1)./(1+25*x.^2);
-f = @(x) exp(sin(pi*x))
-n = 15;
+%f = @(x) exp(sin(pi*x))
+n = 50;
 
 %Determine x0 [which is x(1)]
 z = linspace(-1, 1, 100001);
